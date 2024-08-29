@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image to HTML Code Generator</title>
+    <style>
+ 
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color:black;
+            jusitfy-content:center;
+        }
+        .container {
+            max-width: 600px;
+            margin: auto;
+        }
+        .output {
+            margin-top: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            background-color: #f9f9f9;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            box-sizing: border-box;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <h1 style="color:white;">Image to HTML Code Generator</h1>
+        <form id="imageForm" style="color:white;">
+            <label for="imageUpload">Upload an image:</label>
+            <input type="file" id="imageUpload" accept="image/*" required>
+            <button type="submit">Generate HTML Code</button>
+        </form>
+        <div class="output">
+            <h2>Generated HTML Code:</h2>
+            <textarea id="htmlCode" readonly></textarea>
+        </div>
+    </div>
+    
+    <script>
+        document.getElementById('imageForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const fileInput = document.getElementById('imageUpload');
+            const file = fileInput.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const imageUrl = e.target.result;
+                    const htmlCode = `<img src="${imageUrl}" alt="Uploaded Image">`;
+                    document.getElementById('htmlCode').textContent = htmlCode;
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+</body>
+</html>
